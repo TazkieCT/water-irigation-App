@@ -5,72 +5,183 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/light_blue_bg"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:text="DeFlood"
-        android:textSize="@dimen/title"
+        android:layout_margin="20dp"
+        android:text="DeFlood Dashboard"
+        android:textSize="26sp"
         android:textStyle="bold"
+        android:textColor="@color/blue_dark"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/title">
+        android:id="@+id/card_waduk1"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_card_gradient"
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/reservoir"
+                android:id="@+id/waduk1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/header"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:text="Waduk 1"
-                android:textStyle="bold"/>
+                android:textColor="@color/blue_dark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/waduk1_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/header"
-                app:layout_constraintTop_toBottomOf="@id/reservoir"
+                android:layout_marginTop="8dp"
+                android:text="Status: Normal"
+                android:textColor="@color/blue_text"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="Status:"/>
+                app:layout_constraintTop_toBottomOf="@id/waduk1_name" />
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/turn"
+                android:id="@+id/waduk1_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:thumbTint="@color/blue_dark"
+                android:trackTint="@color/blue_light_track"
+                app:showText="false"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Off"
-                app:layout_constraintStart_toEndOf="@id/turn"
-                app:layout_constraintTop_toTopOf="@id/turn"
-                app:layout_constraintBottom_toBottomOf="@id/turn"
-                android:layout_marginStart="8dp"/>
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/waduk1_capacity"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="70"
+                    android:progressDrawable="@drawable/circular_progress_water"
+                    android:rotation="-90" />
+
+                <TextView
+                    android:id="@+id/waduk1_percent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="70%"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_waduk2"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:layout_constraintTop_toBottomOf="@id/card_waduk1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_card_gradient"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/waduk2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waduk 2"
+                android:textColor="@color/blue_dark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/waduk2_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Status: Waspada"
+                android:textColor="@color/blue_text"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/waduk2_name" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/waduk2_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumbTint="@color/blue_dark"
+                android:trackTint="@color/blue_light_track"
+                app:showText="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    android:id="@+id/waduk2_capacity"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="85"
+                    android:progressDrawable="@drawable/circular_progress_water"
+                    android:rotation="-90" />
+
+                <TextView
+                    android:id="@+id/waduk2_percent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="85%"
+                    android:textColor="@color/blue_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
