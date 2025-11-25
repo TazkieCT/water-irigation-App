@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Status: Normal"
+                android:text="Status: Tingkat Air Rendah"
                 android:textColor="@color/blue_text"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
                     android:layout_height="match_parent"
                     android:indeterminate="false"
                     android:max="100"
-                    android:progress="70"
+                    android:progress="20"
                     android:progressDrawable="@drawable/circular_progress_water"
                     android:rotation="-90" />
 
@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="70%"
+                    android:text="20%"
                     android:textColor="@color/blue_dark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Status: Waspada"
+                android:text="Status: Tingkat Air Tinggi"
                 android:textColor="@color/blue_text"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
