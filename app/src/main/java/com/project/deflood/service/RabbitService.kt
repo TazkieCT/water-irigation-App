@@ -10,12 +10,29 @@ class RabbitService : Service() {
 
     private val repo = RabbitRepository()
 
+    companion object {
+        const val ACTION_UPDATE_UI = "com.project.deflood.UPDATE_UI"
+        const val EXTRA_DATA = "extra_data"
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         repo.start { msg ->
-            Log.d("RabbitService", "Message: $msg")
+            val broadcastIntent = Intent(ACTION_UPDATE_UI)
+            broadcastIntent.putExtra(EXTRA_DATA, msg)
+            sendBroadcast(broadcastIntent)
         }
         return START_STICKY
     }
 
-    override fun onBind(p0: Intent?): IBinder? = null
+    fun sendPumpCommand(pumpId: Int, isOn: Boolean) {
+        repo.sendCommand(pumpId, isOn)
+    }
+
+    inner class LocalBinder : android.os.Binder() {
+        fun getService(): RabbitService = this@RabbitService
+    }
+
+    override fun onBind(intent: Intent?): IBinder {
+        return LocalBinder()
+    }
 }
