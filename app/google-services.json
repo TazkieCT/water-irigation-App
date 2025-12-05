@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "98490036722",
+    "firebase_url": "https://defloodiot-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "defloodiot",
+    "storage_bucket": "defloodiot.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98490036722:android:8f3d0116572c665134fb6b",
+        "android_client_info": {
+          "package_name": "com.project.deflood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYT2A8UH52QMRmw-hYgNM7pjnUOz6zMwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

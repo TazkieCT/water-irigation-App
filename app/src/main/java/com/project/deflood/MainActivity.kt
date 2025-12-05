@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,12 +26,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var barB: ProgressBar
     private lateinit var percentageB: TextView
 
+    private lateinit var button: Button
+
     private var rabbitService: RabbitService? = null
     private var isBound = false
 
-    // Flag untuk mencegah listener aktif saat update programmatic
     private var isUpdatingFromEsp = false
-    // Track mode manual untuk setiap pump
     private var manualModeA = false
     private var manualModeB = false
 
@@ -70,11 +71,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSwitchListeners() {
         switchA.setOnCheckedChangeListener { _, isChecked ->
-            // Abaikan jika perubahan dari ESP32, bukan dari user tap
             if (isUpdatingFromEsp) return@setOnCheckedChangeListener
 
             if (isBound) {
-                // ON = mode manual aktif, OFF = kembali ke mode otomatis
                 manualModeA = isChecked
                 rabbitService?.sendPumpCommand(1, isChecked)
                 statusA.text = if(isChecked) "Status: Manual ON" else "Status: Otomatis"
@@ -82,11 +81,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         switchB.setOnCheckedChangeListener { _, isChecked ->
-            // Abaikan jika perubahan dari ESP32, bukan dari user tap
             if (isUpdatingFromEsp) return@setOnCheckedChangeListener
 
             if (isBound) {
-                // ON = mode manual aktif, OFF = kembali ke mode otomatis
                 manualModeB = isChecked
                 rabbitService?.sendPumpCommand(2, isChecked)
                 statusB.text = if(isChecked) "Status: Manual ON" else "Status: Otomatis"
@@ -123,6 +120,12 @@ class MainActivity : AppCompatActivity() {
         switchB = findViewById(R.id.waduk2_switch)
         barB = findViewById(R.id.waduk2_capacity)
         percentageB = findViewById(R.id.waduk2_percent)
+
+        button = findViewById(R.id.logButton)
+        button.setOnClickListener {
+            val intent = Intent(this, LogsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun showData(data: String) {
@@ -134,14 +137,12 @@ class MainActivity : AppCompatActivity() {
             val levelB = parts[2].split(":")[1].trim().toDouble() // Jarak sensor B
 
             runOnUiThread {
-                // Set flag agar listener tidak aktif saat update programmatic
                 isUpdatingFromEsp = true
 
                 val percentA = toPercent(levelA)
                 barA.progress = percentA
                 percentageA.text = "$percentA%"
 
-                // Hanya update switch & status dari ESP jika tidak dalam mode manual
                 val espPumpAOn = pumpStatus.contains("1", ignoreCase = true)
                 if (!manualModeA) {
                     switchA.isChecked = espPumpAOn
@@ -158,7 +159,6 @@ class MainActivity : AppCompatActivity() {
                     statusB.text = if (percentB > 80) "Status: BAHAYA" else "Status: Aman"
                 }
 
-                // Reset flag setelah selesai update
                 isUpdatingFromEsp = false
             }
         } catch (e: Exception) {
